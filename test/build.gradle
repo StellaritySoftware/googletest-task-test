@@ -1,0 +1,87 @@
+apply plugin: "groovy"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def groovyVersion = "2.4.15"
+    def gebVersion = "2.1"
+    def seleniumVersion = "3.6.0"
+
+    testCompile "org.codehaus.groovy:groovy-all:$groovyVersion"
+
+    // If using Spock, need to depend on geb-spock
+    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
+        exclude group: "org.codehaus.groovy"
+    }
+
+    // Need a driver implementation
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    testRuntime "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+    testCompile "org.apache.commons:commons-text:1.1"
+}
+
+task copyResources(type: Copy) {
+    from "src/test/resources/ftpSample"
+    into "${System.env.FTP_HOME}/downloadDir"
+    fileMode 0666
+    dirMode 0777
+}
+
+test{
+
+    dependsOn copyResources
+
+    systemProperty("user", (System.getProperty("user") != null ? System.getProperty("user") : "admin"))
+    systemProperty("password", (System.getProperty("password") != null ? System.getProperty("password") : "admin"))
+    systemProperty("geb.env", System.getProperty("geb.env"))
+
+    filter{
+
+//        includeTestsMatching "ParseXmlTest"
+//        includeTestsMatching "UseFileNameCollisionTest"
+//        includeTestsMatching "UseTaskNameCollisionTest"
+//        includeTestsMatching "UseTaskAndFileNamesCollisionTest"
+//        includeTestsMatching "CheckPatternsTest"
+//        includeTestsMatching "UseSubdirectoryTest"
+        includeTestsMatching "EditFieldsTest"
+    }
+
+    systemProperties "geb.build.reportsDir": "$reportsDir/geb"
+}
+
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
+task license {
+    def p = ['curl',
+             '-X', 'PUT', '-H', "Content-Type: application/vnd.atl.plugins+json",  '-d',
+             "{\"rawLicense\":\"AAABCA0ODAoPeNpdj01PwkAURffzKyZxZ1IyUzARkllQ24gRaQMtGnaP8VEmtjPNfFT59yJVFyzfubkn796Ux0Bz6SmbUM5nbDzj97RISxozHpMUnbSq88poUaLztFEStUN6MJZ2TaiVpu/YY2M6tI6sQrtHmx8qd74EZ+TBIvyUU/AoYs7jiE0jzknWQxMuifA2IBlUbnQ7AulVjwN9AaU9atASs69O2dNFU4wXJLc1aOUGw9w34JwCTTZoe7RPqUgep2X0Vm0n0fNut4gSxl/Jcnj9nFb6Q5tP/Ueu3L+0PHW4ghZFmm2zZV5k6/95CbR7Y9bYGo/zGrV3Ir4jRbDyCA6vt34DO8p3SDAsAhQnJjLD5k9Fr3uaIzkXKf83o5vDdQIUe4XequNCC3D+9ht9ZYhNZFKmnhc=X02dh\"}",
+             '-u', 'admin:admin', "${System.env.BAMBOO_URL}/bamboo/rest/plugins/1.0/com.stellarity.bamboo.boosttest-task-key/license"].execute()
+
+
+    println p.waitFor()
+    println p.err.text
+    println p.text
+}
+
+
+task dismissNotification {
+    def p = ['curl',
+             '-X', 'POST', '-H', "Content-Type: application/json", '-d',
+             "{\"username\":\"admin\",\"notificationId\":\"1\",\"snooze\":false}",
+             '-u', 'admin:admin', "${System.env.BAMBOO_URL}/bamboo/rest/troubleshooting/1.0/dismissNotification"].execute()
+
+    println p.waitFor()
+    println p.err.text
+    println p.text
+}
+
