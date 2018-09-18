@@ -18,9 +18,7 @@ class ParseXmlTest extends GebReportingSpec
         createNewPlanConfigurePlanPage.setRandomProjectPlanNames()
 
         DirectoryCreator.createPlanDirectory()
-        DirectoryCreator.copyFile("testXml.xml")
-        DirectoryCreator.copyFile("libboost_unit_test_framework.so.1.58.0")
-
+        DirectoryCreator.copyFile("report.xml")
 
         createNewPlanConfigurePlanPage.setNoneRepository()
 
@@ -30,9 +28,9 @@ class ParseXmlTest extends GebReportingSpec
 
         def boostTestTaskConfiguration = tasks.selectBoostTesttask()
         boostTestTaskConfiguration.parseOnlyModeCheckbox = true
-        boostTestTaskConfiguration.enterOutputFilesName("testXml.xml")
+        boostTestTaskConfiguration.enterOutputFilesName("report.xml")
         boostTestTaskConfiguration.uncollapseAdvancedOptions()
-        boostTestTaskConfiguration.pickOutdatedFiles = true
+        boostTestTaskConfiguration.checkPickOutdatedFiles()
 
         boostTestTaskConfiguration.clickSave()
 
@@ -43,7 +41,7 @@ class ParseXmlTest extends GebReportingSpec
         then:
 
         planBuild.waitForFailedHeader()
-        planBuild.checkNumberOfFailedTests('5')
+        planBuild.checkNumberOfFailedTests('3')
 
     }
 }

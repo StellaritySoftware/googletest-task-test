@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="11" failures="3" disabled="1" errors="0" timestamp="2018-09-16T20:55:46" time="1.001" name="AllTests">
+  <testsuite name="TestSuite1" tests="3" failures="0" disabled="1" errors="0" time="1">
+    <testcase name="SucceddedTest" status="run" time="0" classname="TestSuite1" />
+    <testcase name="AnotherSucceddedTest" status="run" time="1" classname="TestSuite1" />
+    <testcase name="DISABLED_SkippedTest" status="notrun" time="0" classname="TestSuite1" />
+  </testsuite>
+  <testsuite name="TestSuite2" tests="3" failures="3" disabled="0" errors="0" time="0.001">
+    <testcase name="FailedTest" status="run" time="0" classname="TestSuite2">
+      <failure message="/home/sergius/Documents/Dev/googletest-demo/src/Demo/Main.cpp:21&#x0A;Expected equality of these values:&#x0A;  &quot;aaa&quot;&#x0A;    Which is: 0x55d49ba99ff9&#x0A;  &quot;bbb&quot;&#x0A;    Which is: 0x55d49ba99ffd" type=""><![CDATA[/home/sergius/Documents/Dev/googletest-demo/src/Demo/Main.cpp:21
+Expected equality of these values:
+  "aaa"
+    Which is: 0x55d49ba99ff9
+  "bbb"
+    Which is: 0x55d49ba99ffd]]></failure>
+    </testcase>
+    <testcase name="MultipleFailedTest" status="run" time="0.001" classname="TestSuite2">
+      <failure message="/home/sergius/Documents/Dev/googletest-demo/src/Demo/Main.cpp:26&#x0A;Expected equality of these values:&#x0A;  &quot;aaa&quot;&#x0A;    Which is: 0x55d49ba99ff9&#x0A;  &quot;bbb&quot;&#x0A;    Which is: 0x55d49ba99ffd" type=""><![CDATA[/home/sergius/Documents/Dev/googletest-demo/src/Demo/Main.cpp:26
+Expected equality of these values:
+  "aaa"
+    Which is: 0x55d49ba99ff9
+  "bbb"
+    Which is: 0x55d49ba99ffd]]></failure>
+      <failure message="/home/sergius/Documents/Dev/googletest-demo/src/Demo/Main.cpp:27&#x0A;Expected equality of these values:&#x0A;  0&#x0A;  1" type=""><![CDATA[/home/sergius/Documents/Dev/googletest-demo/src/Demo/Main.cpp:27
+Expected equality of these values:
+  0
+  1]]></failure>
+    </testcase>
+    <testcase name="ExceptionTest" status="run" time="0" classname="TestSuite2">
+      <failure message="unknown file&#x0A;C++ exception with description &quot;exception&quot; thrown in the test body." type=""><![CDATA[unknown file
+C++ exception with description "exception" thrown in the test body.]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Unsigned/TypedTest/0" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Success" type_param="unsigned char" status="run" time="0" classname="Unsigned/TypedTest/0" />
+  </testsuite>
+  <testsuite name="Unsigned/TypedTest/1" tests="1" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="Success" type_param="unsigned int" status="run" time="0" classname="Unsigned/TypedTest/1" />
+  </testsuite>
+  <testsuite name="InstanciatedParamTest/ParamTest" tests="3" failures="0" disabled="0" errors="0" time="0">
+    <testcase name="SucceddedTest/0" value_param="1" status="run" time="0" classname="InstanciatedParamTest/ParamTest" />
+    <testcase name="SucceddedTest/1" value_param="2" status="run" time="0" classname="InstanciatedParamTest/ParamTest" />
+    <testcase name="SucceddedTest/2" value_param="3" status="run" time="0" classname="InstanciatedParamTest/ParamTest" />
+  </testsuite>
+</testsuites>

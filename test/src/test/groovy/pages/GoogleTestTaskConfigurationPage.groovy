@@ -5,11 +5,11 @@ import geb.Page
 /**
  * Created by Kateryna on 05.12.2017.
  */
-class BoostTestTaskConfigurationPage extends Page{
+class GoogleTestTaskConfigurationPage extends Page{
 
     static url = {Config.context + "/build/admin/create/createPlanTasks.action"}
-    static at = { ($("#createTask h2").text() == "Boost::Test Task configuration" ||
-                $("#updateTask h2").text() == "Boost::Test Task configuration")
+    static at = { ($("#createTask h2").text() == "GoogleTest Task configuration" ||
+                $("#updateTask h2").text() == "GoogleTest Task configuration")
     }
 
     static content = {
@@ -17,17 +17,17 @@ class BoostTestTaskConfigurationPage extends Page{
         taskDescriptionUpdate{$("#updateTask_userDescription")}
         disabletaskCheckbox {$("#createTask_taskDisabled")}
         disabletaskCheckboxUpdate {$("#updateTask_taskDisabled")}
-        parseOnlyModeCheckbox{$("#boosttestParseOnly")}
-        testExecutables {$("#boosttestExecutables")}
-        subdirectory {$("#boosttestSubdirectory")}
-        taskNameCollisions {$("#boosttestUseTaskName")}
-        fileNameCollisions {$("#boosttestUseFileName")}
-        environmentVariable {$("input#boosttestEnvironment")}
-        timeout{$("#boosttestTimeout")}
+        parseOnlyModeCheckbox{$("#googletestParseOnly")}
+        testExecutables {$("#googletestExecutables")}
+        subdirectory {$("#googletestSubdirectory")}
+        taskNameCollisions {$("#googletestUseTaskName")}
+        fileNameCollisions {$("#googletestUseFileName")}
+        environmentVariable {$("input#googletestEnvironment")}
+        timeout{$("#googletestTimeout")}
         successfulTaskCreationText {$("div.aui-message.aui-message-success").text() == "Task created successfully."}
         successfulTaskUpdatedText {$("div.aui-message.aui-message-success").text() == "Task saved successfully."}
-        outpuFiles{$("#boosttestOutputFiles")}
-        pickOutdatedFiles{$("#boosttestPickOutdatedFiles")}
+        outpuFiles{$("#googletestOutputFiles")}
+        pickOutdatedFiles{$("#googletestPickOutdatedFiles")}
         collapseSection{$("form div.collapsible-details")}
 
     }
@@ -48,22 +48,27 @@ class BoostTestTaskConfigurationPage extends Page{
     }
 
     def enterOutputFilesName(String name) {
-        js."document.querySelector('#boosttestOutputFiles').scrollIntoView()"
+        js."document.querySelector('#googletestOutputFiles').scrollIntoView()"
         outpuFiles << name
     }
 
+    def setEnvironmentVariable(String input) {
+        js."document.querySelector('input#googletestEnvironment').scrollIntoView()"
+        environmentVariable << input
+    }
+
     def checkTaskNameCollision() {
-        js."document.querySelector('#boosttestUseTaskName').scrollIntoView"
-        js."document.querySelector('#boosttestUseTaskName').click()"
+        js."document.querySelector('#googletestUseTaskName').scrollIntoView"
+        js."document.querySelector('#googletestUseTaskName').click()"
     }
 
     def checkFileNameCollision() {
-        js."document.querySelector('#boosttestUseFileName').scrollIntoView()"
-        js."document.querySelector('#boosttestUseFileName').click()"
+        js."document.querySelector('#googletestUseFileName').scrollIntoView()"
+        js."document.querySelector('#googletestUseFileName').click()"
     }
 
     def checkPickOutdatedFiles() {
-        js."document.querySelector('#boosttestOutputFiles').scrollIntoView()"
+        js."document.querySelector('#googletestPickOutdatedFiles').scrollIntoView()"
         pickOutdatedFiles = true
     }
  }

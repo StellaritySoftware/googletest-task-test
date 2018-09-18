@@ -27,7 +27,7 @@ class EditFieldsTest extends GebReportingSpec
         boostTestTaskConfiguration.testExecutables << "my_test,testFile_Test"
         boostTestTaskConfiguration.subdirectory << "subDir"
         boostTestTaskConfiguration.uncollapseAdvancedOptions()
-        boostTestTaskConfiguration.environmentVariable << "JAVA_OPTS=-Xmx256m -Xms128m"
+        boostTestTaskConfiguration.setEnvironmentVariable("JAVA_OPTS=-Xmx256m -Xms128m")
         boostTestTaskConfiguration.taskNameCollisions = true
         boostTestTaskConfiguration.fileNameCollisions = true
         boostTestTaskConfiguration.timeout = "5"

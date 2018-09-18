@@ -17,9 +17,8 @@ class CheckPatternsTest extends GebReportingSpec
         def createNewPlanConfigurePlanPage = dashboardPage.createNewPlan()
         createNewPlanConfigurePlanPage.setRandomProjectPlanNames()
         DirectoryCreator.createPlanDirectory()
-        DirectoryCreator.copyFile("my_test")
-        DirectoryCreator.copyFile("libboost_unit_test_framework.so.1.58.0")
         DirectoryCreator.copyFile("testFile_Test")
+        DirectoryCreator.copyFile("googletest-demo")
         DirectoryCreator.copyFile("t_st")
         createNewPlanConfigurePlanPage.setNoneRepository()
 
@@ -43,8 +42,8 @@ class CheckPatternsTest extends GebReportingSpec
         planBuild.testsTabLink.click()
 
         then:
-        planBuild.checkTextAddedToTests('my_test', 5)
-        planBuild.checkTextAddedToTests('testFile_Test', 5)
+        planBuild.checkTextAddedToTests('testFile_Test', 3)
+        planBuild.checkTextAddedToTests('googletest-demo', 3)
         planBuild.checkTextAddedToTests('t_st', 0)
 
     }

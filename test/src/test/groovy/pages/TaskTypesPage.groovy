@@ -12,12 +12,12 @@ class TaskTypesPage extends Page{
 
     static content =
     {
-       boostTest{ $("div#task-types-dialog a", 0, title:"Boost::Test Task") }
+       googleTest{ $("div#task-types-dialog a", 0, title:"GoogleTest Task") }
 
     }
 
     def selectBoostTesttask(){
-        boostTest.click()
-        browser.at BoostTestTaskConfigurationPage
+        googleTest.click()
+        browser.at GoogleTestTaskConfigurationPage
     }
 }

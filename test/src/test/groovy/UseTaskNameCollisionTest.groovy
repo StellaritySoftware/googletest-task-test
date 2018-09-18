@@ -17,8 +17,7 @@ class UseTaskNameCollisionTest extends GebReportingSpec
         def createNewPlanConfigurePlanPage = dashboardPage.createNewPlan()
         createNewPlanConfigurePlanPage.setRandomProjectPlanNames()
         DirectoryCreator.createPlanDirectory()
-        DirectoryCreator.copyFile("my_test")
-        DirectoryCreator.copyFile("libboost_unit_test_framework.so.1.58.0")
+        DirectoryCreator.copyFile("googletest-demo")
         createNewPlanConfigurePlanPage.setNoneRepository()
 
         def configureTasksPage = createNewPlanConfigurePlanPage.clickConfigurePlanButton()
@@ -27,7 +26,7 @@ class UseTaskNameCollisionTest extends GebReportingSpec
 
         def boostTestTaskConfiguration = tasks.selectBoostTesttask()
         boostTestTaskConfiguration.taskDescription << "myBoostTask"
-        boostTestTaskConfiguration.testExecutables << "my_test"
+        boostTestTaskConfiguration.testExecutables << "googletest-demo"
         boostTestTaskConfiguration.checkTaskNameCollision()
         boostTestTaskConfiguration.clickSave()
 
@@ -42,7 +41,8 @@ class UseTaskNameCollisionTest extends GebReportingSpec
         planBuild.testsTabLink.click()
 
         then:
-        planBuild.checkTextAddedToTests('myBoostTask', 5)
+        planBuild.checkTextAddedToTests('myBoostTask', 3)
+        planBuild.checkTextAddedToTests('myBoostTask', 3)
 
     }
 }

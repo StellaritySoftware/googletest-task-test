@@ -40,6 +40,6 @@ class CreateNewPlanConfigureTasksPage extends Page
 
     def editBoostTestTask(){
         editTaskLink.click()
-        browser.at BoostTestTaskConfigurationPage
+        browser.at GoogleTestTaskConfigurationPage
     }
 }

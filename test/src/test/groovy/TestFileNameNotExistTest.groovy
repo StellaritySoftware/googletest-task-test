@@ -18,8 +18,7 @@ class TestFileNameNotExistTest extends GebReportingSpec
         createNewPlanConfigurePlanPage.setRandomProjectPlanNames()
 
         DirectoryCreator.createPlanDirectory()
-        DirectoryCreator.copyFile("my_test")
-        DirectoryCreator.copyFile("libboost_unit_test_framework.so.1.58.0")
+        DirectoryCreator.copyFile("googletest-demo")
 
         createNewPlanConfigurePlanPage.setNoneRepository()
 

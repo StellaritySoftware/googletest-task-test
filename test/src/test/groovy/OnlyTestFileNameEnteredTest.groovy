@@ -19,8 +19,7 @@ class OnlyTestFileNameEnteredTest extends GebReportingSpec
         createNewPlanConfigurePlanPage.setRandomProjectPlanNames()
 
         DirectoryCreator.createPlanDirectory()
-        DirectoryCreator.copyFile("my_test")
-        DirectoryCreator.copyFile("libboost_unit_test_framework.so.1.58.0")
+        DirectoryCreator.copyFile("googletest-demo")
 
         createNewPlanConfigurePlanPage.setNoneRepository()
 
@@ -29,7 +28,7 @@ class OnlyTestFileNameEnteredTest extends GebReportingSpec
         def tasks = configureTasksPage.addTask()
 
         def boostTestTaskConfiguration = tasks.selectBoostTesttask()
-        boostTestTaskConfiguration.testExecutables << "my_test"
+        boostTestTaskConfiguration.testExecutables << "googletest-demo"
         boostTestTaskConfiguration.clickSave()
 
         def createdPlan = configureTasksPage.clickCreateButton()
@@ -39,7 +38,7 @@ class OnlyTestFileNameEnteredTest extends GebReportingSpec
         then:
 
         planBuild.waitForFailedHeader()
-        planBuild.checkNumberOfFailedTests('5')
+        planBuild.checkNumberOfFailedTests('3')
 
     }
 }
