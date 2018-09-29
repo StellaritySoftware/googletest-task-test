@@ -1,6 +1,8 @@
+import commonpages.LoginPage
+import configuration.CommonConfig
 import geb.spock.GebReportingSpec
-import pages.Config
-import pages.LoginPage
+import pages.GoogleTestTaskConfigurationPage
+import pages.TaskTypesPage
 
 class EditFieldsTest extends GebReportingSpec
 {
@@ -11,7 +13,7 @@ class EditFieldsTest extends GebReportingSpec
 
         def loginPage = browser.to LoginPage
 
-        def dashboardPage = loginPage.login(Config.user, Config.password)
+        def dashboardPage = loginPage.login(CommonConfig.user, CommonConfig.password)
 
         def createNewPlanConfigurePlanPage = dashboardPage.createNewPlan()
         createNewPlanConfigurePlanPage.setRandomProjectPlanNames()
@@ -19,71 +21,71 @@ class EditFieldsTest extends GebReportingSpec
 
         def configureTasksPage = createNewPlanConfigurePlanPage.clickConfigurePlanButton()
 
-        def tasks = configureTasksPage.addTask()
+        def tasks = configureTasksPage.addTask(TaskTypesPage)
 
-        def boostTestTaskConfiguration = tasks.selectBoostTesttask()
-        boostTestTaskConfiguration.taskDescription << "my_task"
-        boostTestTaskConfiguration.disabletaskCheckbox = true
-        boostTestTaskConfiguration.testExecutables << "my_test,testFile_Test"
-        boostTestTaskConfiguration.subdirectory << "subDir"
-        boostTestTaskConfiguration.uncollapseAdvancedOptions()
-        boostTestTaskConfiguration.setEnvironmentVariable("JAVA_OPTS=-Xmx256m -Xms128m")
-        boostTestTaskConfiguration.taskNameCollisions = true
-        boostTestTaskConfiguration.fileNameCollisions = true
-        boostTestTaskConfiguration.timeout = "5"
+        def googleTestTaskConfiguration = tasks.selectGoogleTestTask()
+        googleTestTaskConfiguration.taskDescription << "my_task"
+        googleTestTaskConfiguration.disabletaskCheckbox = true
+        googleTestTaskConfiguration.testExecutables << "my_test,testFile_Test"
+        googleTestTaskConfiguration.subdirectory << "subDir"
+        googleTestTaskConfiguration.uncollapseAdvancedOptions()
+        googleTestTaskConfiguration.setEnvironmentVariable("JAVA_OPTS=-Xmx256m -Xms128m")
+        googleTestTaskConfiguration.taskNameCollisions = true
+        googleTestTaskConfiguration.fileNameCollisions = true
+        googleTestTaskConfiguration.timeout = "5"
 
-        boostTestTaskConfiguration.clickSave()
+        googleTestTaskConfiguration.clickSave()
 
-        configureTasksPage.editBoostTestTask()
+        configureTasksPage.editTask(GoogleTestTaskConfigurationPage)
 // FIRST CHECK
         then:
-        boostTestTaskConfiguration.taskDescriptionUpdate.value() == "my_task"
-        boostTestTaskConfiguration.disabletaskCheckboxUpdate == "true"
-        boostTestTaskConfiguration.testExecutables.value() == "my_test,testFile_Test"
-        boostTestTaskConfiguration.subdirectory.value() == "subDir"
+        googleTestTaskConfiguration.taskDescriptionUpdate.value() == "my_task"
+        googleTestTaskConfiguration.disabletaskCheckboxUpdate == "true"
+        googleTestTaskConfiguration.testExecutables.value() == "my_test,testFile_Test"
+        googleTestTaskConfiguration.subdirectory.value() == "subDir"
 
         when:
-        boostTestTaskConfiguration.uncollapseAdvancedOptions()
+        googleTestTaskConfiguration.uncollapseAdvancedOptions()
 
         then:
-        boostTestTaskConfiguration.environmentVariable.value() == "JAVA_OPTS=-Xmx256m -Xms128m"
-        boostTestTaskConfiguration.taskNameCollisions.value() == "true"
-        boostTestTaskConfiguration.fileNameCollisions.value() == "true"
-        boostTestTaskConfiguration.timeout.value() == "5"
+        googleTestTaskConfiguration.environmentVariable.value() == "JAVA_OPTS=-Xmx256m -Xms128m"
+        googleTestTaskConfiguration.taskNameCollisions.value() == "true"
+        googleTestTaskConfiguration.fileNameCollisions.value() == "true"
+        googleTestTaskConfiguration.timeout.value() == "5"
 // END FIRST CHECK
 
 // SECOND CHECK
 
         when:
-        configureTasksPage.editBoostTestTask()
+        configureTasksPage.editTask(GoogleTestTaskConfigurationPage)
 
-        boostTestTaskConfiguration.taskDescriptionUpdate = "second_task"
-        boostTestTaskConfiguration.disabletaskCheckboxUpdate = false
-        boostTestTaskConfiguration.parseOnlyModeCheckbox = true
-        boostTestTaskConfiguration.enterOutputFilesName("testXml.xml")
-        boostTestTaskConfiguration.subdirectory = ""
-        boostTestTaskConfiguration.taskNameCollisions = false
-        boostTestTaskConfiguration.fileNameCollisions = false
-        boostTestTaskConfiguration.checkPickOutdatedFiles()
+        googleTestTaskConfiguration.taskDescriptionUpdate = "second_task"
+        googleTestTaskConfiguration.disabletaskCheckboxUpdate = false
+        googleTestTaskConfiguration.parseOnlyModeCheckbox = true
+        googleTestTaskConfiguration.enterOutputFilesName("testXml.xml")
+        googleTestTaskConfiguration.subdirectory = ""
+        googleTestTaskConfiguration.taskNameCollisions = false
+        googleTestTaskConfiguration.fileNameCollisions = false
+        googleTestTaskConfiguration.checkPickOutdatedFiles()
 
-        boostTestTaskConfiguration.clickSave()
+        googleTestTaskConfiguration.clickSave()
 
-        configureTasksPage.editBoostTestTask()
+        configureTasksPage.editTask(GoogleTestTaskConfigurationPage)
 
         then:
-        boostTestTaskConfiguration.taskDescriptionUpdate.value() == "second_task"
-        boostTestTaskConfiguration.disabletaskCheckboxUpdate.value() == null
-        boostTestTaskConfiguration.parseOnlyModeCheckbox.value() == "true"
-        boostTestTaskConfiguration.subdirectory.value() == ""
+        googleTestTaskConfiguration.taskDescriptionUpdate.value() == "second_task"
+        googleTestTaskConfiguration.disabletaskCheckboxUpdate.value() == null
+        googleTestTaskConfiguration.parseOnlyModeCheckbox.value() == "true"
+        googleTestTaskConfiguration.subdirectory.value() == ""
 
         when:
-        boostTestTaskConfiguration.uncollapseAdvancedOptions()
+        googleTestTaskConfiguration.uncollapseAdvancedOptions()
 
         then:
-        boostTestTaskConfiguration.outpuFiles.value() == "testXml.xml"
-        boostTestTaskConfiguration.taskNameCollisions.value() == null
-        boostTestTaskConfiguration.fileNameCollisions.value() == null
-        boostTestTaskConfiguration.pickOutdatedFiles.value() == "true"
+        googleTestTaskConfiguration.outpuFiles.value() == "testXml.xml"
+        googleTestTaskConfiguration.taskNameCollisions.value() == null
+        googleTestTaskConfiguration.fileNameCollisions.value() == null
+        googleTestTaskConfiguration.pickOutdatedFiles.value() == "true"
 
     }
 }

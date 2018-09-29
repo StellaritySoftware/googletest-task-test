@@ -9,6 +9,8 @@ dependencies {
     def gebVersion = "2.1"
     def seleniumVersion = "3.6.0"
 
+    testCompile project(':common-bamboo-page-objects')
+
     testCompile "org.codehaus.groovy:groovy-all:$groovyVersion"
 
     // If using Spock, need to depend on geb-spock
@@ -41,7 +43,6 @@ test{
     systemProperty("geb.env", System.getProperty("geb.env"))
 
 //    filter{
-
 //        includeTestsMatching "ParseXmlTest"
 //        includeTestsMatching "UseFileNameCollisionTest"
 //        includeTestsMatching "UseTaskNameCollisionTest"
@@ -51,8 +52,7 @@ test{
 //        includeTestsMatching "EditFieldsTest"
 //        includeTestsMatching "OnlyTestFileNameEnteredTest"
 //        includeTestsMatching "TestFileNameNotExistTest"
-
-    //}
+//    }
 
     systemProperties "geb.build.reportsDir": "$reportsDir/geb"
 }
@@ -87,4 +87,3 @@ task dismissNotification {
     println p.err.text
     println p.text
 }
-

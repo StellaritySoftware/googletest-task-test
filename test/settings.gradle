@@ -1,1 +1,2 @@
 rootProject.name = 'googletest-plugin'
+include 'common-bamboo-page-objects'

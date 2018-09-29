@@ -1,5 +1,6 @@
 package pages
 
+import configuration.CommonConfig
 import geb.Page
 
 /**
@@ -7,7 +8,7 @@ import geb.Page
  */
 class TaskTypesPage extends Page{
 
-    static url =  Config.context + "/build/admin/edit/addTask.action"
+    static url =  CommonConfig.context + "/build/admin/edit/addTask.action"
     static at = { $("#task-types-dialog h2.dialog-title").text() == "Task types"}
 
     static content =
@@ -16,7 +17,7 @@ class TaskTypesPage extends Page{
 
     }
 
-    def selectBoostTesttask(){
+    def selectGoogleTestTask(){
         googleTest.click()
         browser.at GoogleTestTaskConfigurationPage
     }
