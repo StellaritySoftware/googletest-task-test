@@ -5,9 +5,9 @@ repositories {
 }
 
 dependencies {
-    def groovyVersion = "2.4.15"
-    def gebVersion = "2.1"
-    def seleniumVersion = "3.6.0"
+    def groovyVersion = "2.5.2"
+    def gebVersion = "2.2"
+    def seleniumVersion = "3.14.0"
 
     testCompile project(':common-bamboo-page-objects')
 
@@ -34,9 +34,12 @@ task copyResources(type: Copy) {
     dirMode 0777
 }
 
-test{
-
+test {
     dependsOn copyResources
+    outputs.upToDateWhen { false }
+    testLogging {
+        exceptionFormat = 'full'
+    }
 
     systemProperty("user", (System.getProperty("user") != null ? System.getProperty("user") : "admin"))
     systemProperty("password", (System.getProperty("password") != null ? System.getProperty("password") : "admin"))
@@ -57,13 +60,6 @@ test{
     systemProperties "geb.build.reportsDir": "$reportsDir/geb"
 }
 
-
-tasks.withType(Test) {
-    testLogging {
-        exceptionFormat = 'full'
-    }
-}
-
 task license {
     def p = ['curl',
              '-X', 'PUT', '-H', "Content-Type: application/vnd.atl.plugins+json",  '-d',
@@ -75,7 +71,6 @@ task license {
     println p.err.text
     println p.text
 }
-
 
 task dismissNotification {
     def p = ['curl',
