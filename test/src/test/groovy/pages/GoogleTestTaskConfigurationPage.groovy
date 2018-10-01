@@ -74,7 +74,9 @@ class GoogleTestTaskConfigurationPage extends Page
 
     def checkPickOutdatedFiles() 
     {
+        //TODO: try interact { moveToElement(someElement) }
         js."document.querySelector('#googletestPickOutdatedFiles').scrollIntoView()"
+        waitFor { pickOutdatedFiles.displayed }
         pickOutdatedFiles = true
     }
  }
