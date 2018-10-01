@@ -30,6 +30,8 @@ class UseTaskAndFileNamesCollisionTest extends GebReportingSpec
         googleTestTaskConfiguration.checkTaskNameCollision()
         googleTestTaskConfiguration.checkFileNameCollision()
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()
 
         def createdPlan = configureTasksPage.clickCreateButton()
 

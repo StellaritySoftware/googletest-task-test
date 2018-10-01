@@ -30,6 +30,8 @@ class OnlyTestFileNameEnteredTest extends GebReportingSpec
         def googleTestTaskConfiguration = tasks.selectGoogleTestTask()
         googleTestTaskConfiguration.testExecutables << "googletest-demo"
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()
 
         def createdPlan = configureTasksPage.clickCreateButton()
 

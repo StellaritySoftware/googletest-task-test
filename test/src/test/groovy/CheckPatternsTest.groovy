@@ -30,6 +30,8 @@ class CheckPatternsTest extends GebReportingSpec
         googleTestTaskConfiguration.testExecutables << "*test*"
         googleTestTaskConfiguration.checkFileNameCollision()
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()        
 
         def createdPlan = configureTasksPage.clickCreateButton()
 

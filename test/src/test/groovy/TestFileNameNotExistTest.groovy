@@ -29,6 +29,8 @@ class TestFileNameNotExistTest extends GebReportingSpec
         def googleTestTaskConfiguration = tasks.selectGoogleTestTask()
         googleTestTaskConfiguration.testExecutables << "my_my_test"
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()
 
         def createdPlan = configureTasksPage.clickCreateButton()
 

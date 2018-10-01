@@ -34,6 +34,8 @@ class ParseXmlTest extends GebReportingSpec
         googleTestTaskConfiguration.checkPickOutdatedFiles()
 
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()
 
         def createdPlan = configureTasksPage.clickCreateButton()
 

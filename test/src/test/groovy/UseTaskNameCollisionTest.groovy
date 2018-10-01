@@ -29,6 +29,8 @@ class UseTaskNameCollisionTest extends GebReportingSpec
         googleTestTaskConfiguration.testExecutables << "googletest-demo"
         googleTestTaskConfiguration.checkTaskNameCollision()
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()
 
         def createdPlan = configureTasksPage.clickCreateButton()
 

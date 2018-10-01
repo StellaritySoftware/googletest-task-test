@@ -29,6 +29,8 @@ class UseSubdirectoryTest extends GebReportingSpec
         googleTestTaskConfiguration.testExecutables << 'googletest-demo'
         googleTestTaskConfiguration.subdirectory << 'subDir'
         googleTestTaskConfiguration.clickSave()
+        
+        configureTasksPage.markEnablePlanCheckbox()
 
         def createdPlan = configureTasksPage.clickCreateButton()
 
