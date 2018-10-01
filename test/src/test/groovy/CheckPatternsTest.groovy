@@ -6,7 +6,6 @@ import pages.TaskTypesPage
 
 class CheckPatternsTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -46,6 +45,5 @@ class CheckPatternsTest extends GebReportingSpec
         planBuild.checkTextAddedToTests('testFile_Test', 3)
         planBuild.checkTextAddedToTests('googletest-demo', 3)
         planBuild.checkTextAddedToTests('t_st', 0)
-
     }
 }

@@ -6,7 +6,6 @@ import pages.TaskTypesPage
 
 class UseFileNameCollisionTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -44,6 +43,5 @@ class UseFileNameCollisionTest extends GebReportingSpec
         then:
         planBuild.checkTextAddedToTests('googletest-demo', 3)
         planBuild.checkTextAddedToTests('testFile_Test', 3)
-
     }
 }

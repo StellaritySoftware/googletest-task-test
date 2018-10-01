@@ -6,7 +6,6 @@ import pages.TaskTypesPage
 
 class UseSubdirectoryTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -44,6 +43,5 @@ class UseSubdirectoryTest extends GebReportingSpec
         then:
         planBuild.waitForFailedHeader()
         planBuild.checkNumberOfFailedTests('3')
-
     }
 }

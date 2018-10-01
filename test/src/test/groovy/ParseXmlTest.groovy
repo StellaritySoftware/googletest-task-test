@@ -7,7 +7,6 @@ import pages.TaskTypesPage
 
 class ParseXmlTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -44,6 +43,5 @@ class ParseXmlTest extends GebReportingSpec
 
         planBuild.waitForFailedHeader()
         planBuild.checkNumberOfFailedTests('3')
-
     }
 }

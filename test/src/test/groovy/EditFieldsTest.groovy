@@ -6,7 +6,6 @@ import pages.TaskTypesPage
 
 class EditFieldsTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -86,6 +85,5 @@ class EditFieldsTest extends GebReportingSpec
         googleTestTaskConfiguration.taskNameCollisions.value() == null
         googleTestTaskConfiguration.fileNameCollisions.value() == null
         googleTestTaskConfiguration.pickOutdatedFiles.value() == "true"
-
     }
 }

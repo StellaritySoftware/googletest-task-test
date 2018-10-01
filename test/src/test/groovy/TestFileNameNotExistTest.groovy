@@ -6,7 +6,6 @@ import pages.TaskTypesPage
 
 class TestFileNameNotExistTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -39,6 +38,5 @@ class TestFileNameNotExistTest extends GebReportingSpec
 
         planBuild.waitForFailedHeader()
         planBuild.waitForCompilationWarning()
-
     }
 }

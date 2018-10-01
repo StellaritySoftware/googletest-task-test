@@ -7,7 +7,6 @@ import pages.TaskTypesPage
 
 class OnlyTestFileNameEnteredTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -40,6 +39,5 @@ class OnlyTestFileNameEnteredTest extends GebReportingSpec
 
         planBuild.waitForFailedHeader()
         planBuild.checkNumberOfFailedTests('3')
-
     }
 }

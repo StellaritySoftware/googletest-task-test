@@ -6,7 +6,6 @@ import pages.TaskTypesPage
 
 class UseTaskNameCollisionTest extends GebReportingSpec
 {
-
     def run()
     {
         when:
@@ -43,7 +42,5 @@ class UseTaskNameCollisionTest extends GebReportingSpec
 
         then:
         planBuild.checkTextAddedToTests('myBoostTask', 3)
-        planBuild.checkTextAddedToTests('myBoostTask', 3)
-
     }
 }
