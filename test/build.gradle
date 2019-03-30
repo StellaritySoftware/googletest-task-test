@@ -27,16 +27,8 @@ dependencies {
     testCompile "org.apache.commons:commons-text:1.1"
 }
 
-task copyResources(type: Copy) {
-    from "src/test/resources/ftpSample"
-    into "${System.env.FTP_HOME}/downloadDir"
-    fileMode 0666
-    dirMode 0777
-}
 
 test {
-    dependsOn copyResources
-    outputs.upToDateWhen { false }
     testLogging {
         exceptionFormat = 'full'
     }
