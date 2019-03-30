@@ -41,11 +41,13 @@ class ParseXmlTest extends GebReportingSpec
 
         def planBuild = createdPlan.runManualBuild()
 
+        then:
+        planBuild.waitForFailedHeader()
+
+        when:
         planBuild.testsTabLink.click()
 
         then:
-
-        planBuild.waitForFailedHeader()
         planBuild.checkNumberOfFailedTests('3')
     }
 }
